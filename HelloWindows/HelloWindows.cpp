@@ -1,3 +1,4 @@
+//
 // HelloWindows.cpp : Defines the entry point for the application.
 //
 
@@ -98,7 +99,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    hInst = hInstance; // Store instance handle in our global variable
 
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+      CW_USEDEFAULT, CW_USEDEFAULT, 640, 480, nullptr, nullptr, hInstance, nullptr);
 
    if (!hWnd)
    {
@@ -125,7 +126,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
-    case WM_COMMAND:
+        case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
@@ -142,19 +143,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-    case WM_PAINT:
+
+        case WM_PAINT:
         {
             PAINTSTRUCT ps;
+            RECT rect;
             HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
+
+            GetClientRect(hWnd, &rect);
+            DrawText(hdc, TEXT("Hello, Windows!"), -1, &rect, DT_SINGLELINE | DT_CENTER | DT_VCENTER);
             EndPaint(hWnd, &ps);
         }
         break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
+
+        case WM_DESTROY:
+            PostQuitMessage(0);
         break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
+
+        default:
+            return DefWindowProc(hWnd, message, wParam, lParam);
     }
     return 0;
 }
@@ -165,16 +172,16 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     UNREFERENCED_PARAMETER(lParam);
     switch (message)
     {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
+        case WM_INITDIALOG:
             return (INT_PTR)TRUE;
-        }
-        break;
+
+        case WM_COMMAND:
+            if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+            {
+                EndDialog(hDlg, LOWORD(wParam));
+                return (INT_PTR)TRUE;
+            }
+            break;
     }
     return (INT_PTR)FALSE;
 }
