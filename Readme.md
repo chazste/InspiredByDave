@@ -48,3 +48,10 @@ What if we turn the optimizer up to 11 on the Assembler? First off "we are the o
 This solution was constructed using Microsoft Visual Studio 2019 (community edition) This version includes the compiler and assembler as well as the necessary includes and libraries. No need for the MASM SDK that Dave refers to for this one. The C/C++ programs should build for x86 and x64 (and ARM but I have not tested that) The assembly version is for 32-bit x86 only. 
 
 I am including a Makefile in the directory for HelloC and HelloAssembly compatible with Microsoft nmake. Go to "Tools->Visual Studio Command Prompt" (You may need to change directories to the project) Then type nmake.
+
+# What else?
+I will accept Pull Requests for additonal compilers in the makefiles. Specifically Gcc, Watcom, lcc, clang and the "free" version of bcc32c (nee Borland)
+
+My expectation is that this program is so simple that the compiler will make little difference.
+
+I would also be interested in the smallest Rust version someone can come up with. I looked into this topic a year or two ago, and at that time the command line did not support droping enough of the run-time to get the final exe under 4 KB. Even if you can get it under 32 KB I would be willing to add it to the project. but my purpose here is to show that while knowing Assembly is a good thing, one should write in it only rarely. (Since the High Level Language tools are really good;)
